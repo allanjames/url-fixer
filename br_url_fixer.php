@@ -98,11 +98,13 @@ jQuery(document).ready(function($){
 
         var offset = $('#offset').val();
         var type = $('#type').find(":selected").val();
+        var cat_adj = $('#cat_adj').find(":selected").val();
         var data = {
         'action': 'br_fixer',
         'dataType': 'text',
         'id': '1',
         'type': type,
+        'cat_adj': cat_adj,
         'adj': offset
         
         };
@@ -129,6 +131,11 @@ jQuery(document).ready(function($){
         <select id="type"> 
             <option value="post">Post</option> 
             <option value="page" selected>Page</option>
+        </select>
+        <h2 class="inl-b">Strip Category From URL:</h2>
+        <select id="cat_adj"> 
+            <option value="yes">Yes</option> 
+            <option value="no" selected>No</option>
         </select>
         <h2>URL format: <?php echo get_option( 'permalink_structure' ); ?></h2>
         <h2 id="retrieve" >Export</h2>
@@ -162,6 +169,7 @@ function br_callback() {
             if(isset($_POST)) {
             $adjustment = $_POST['adj']; 
             $kind = $_POST['type'];
+            $strip_cat = $_POST['cat_adj'];
             $post_query = new WP_Query(array('posts_per_page' => -1,'post_type'=>$kind));
             $url_array = array();
             $site_len = strlen(site_url());
@@ -169,8 +177,11 @@ function br_callback() {
             $i = 0;
             $output;
             if ($post_query->have_posts()) : while ($post_query->have_posts()) : $post_query->the_post(); 
-                //$url_array[$i] = get_the_permalink();
-                $output .= 'Redirect 301 '.substr(get_the_permalink(),$adjustment).' '.substr(get_the_permalink(),$site_len)."\r\n"; 
+                $cats = get_the_category();
+                if($strip_cat=="yes") { $cat_adj = strlen($cats[0]->slug)+1; }
+                //$cat = $cats[0];
+                $output .= 'Redirect 301 ';
+                $output .= substr(get_the_permalink(),$adjustment+$cat_adj).' '.substr(get_the_permalink(),$site_len)."\r\n"; 
                 $i++;
                 endwhile; 
             endif; 

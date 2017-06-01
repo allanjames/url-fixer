@@ -126,18 +126,16 @@ jQuery(document).ready(function($){
     $('#csv').click(function(){
 
         var data = retrieve(csv=1);
-        //var test_array = [["name1", 2, 3], ["name2", 4, 5], ["name3", 6, 7], ["name4", 8, 9], ["name5", 10, 11]];
         var csvContent = "data:text/csv;charset=utf-8,";
         $.post(ajaxurl, data, function(response) {
-            //console.log(response);
-            var test_array = response;
-            test_array.forEach(function(infoArray, index){
-                //console.log(infoArray.old);
-                //dataString = infoArray.split(" ");
-                var info = infoArray;
-                //csvContent += dataString+ "\n";
-            });
-
+            //console.log(JSON.parse(response));
+            var test_array = JSON.parse(response);
+            var len = Object.keys(test_array).length;
+            var i;
+            
+            for(i=0; i<len; i++) {
+                csvContent+=test_array[i].old+','+test_array[i].new+', \n';
+            }
             var encodedUri = encodeURI(csvContent);
             window.open(encodedUri);
         });
@@ -172,6 +170,7 @@ jQuery(document).ready(function($){
         </select>
         <h2>URL format: <?php echo get_option( 'permalink_structure' ); ?></h2>
         <h2 id="retrieve" >Update HTACCESS</h2>
+        <h2 id="csv" >export to CSV</h2>
         <textarea></textarea>
         <?php 
         
@@ -233,9 +232,9 @@ function br_callback() {
                     echo "HTACCESS file is not writable";
                 endif;
             } else {
-                header('Content-Type: application/json');
+                //header('Content-Type: application/json');
 
-                echo json_encode($master);
+                echo json_encode($master,JSON_FORCE_OBJECT);
             }
             die();
             }     

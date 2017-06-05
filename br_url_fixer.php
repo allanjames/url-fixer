@@ -208,11 +208,13 @@ function br_callback() {
             $site_len = strlen(site_url());
             $off = strpos(site_url(),'/',1)+$site_len;
             $i = 0;
-            $output;
+            $output = "\r\n";
             $master = array();
             if ($post_query->have_posts()) : while ($post_query->have_posts()) : $post_query->the_post(); 
                 $cats = get_the_category();
-                if($strip_cat=="yes") { $cat_adj = strlen($cats[0]->slug)+1; }
+                if($strip_cat=="yes") { $cat_adj = strlen($cats[0]->slug)+1; } else {
+                    $cat_adj = null;
+                }
                 $output .= 'Redirect 301 ';
                 $master[$i]['index'] = $i;
                 $master[$i]['old'] = substr(get_the_permalink(),$adjustment+$cat_adj);
@@ -224,10 +226,11 @@ function br_callback() {
             if($csv==2){ 
                 $file = get_home_path().'.htaccess';
                 if(is_writable($file)) :
+                    $out =  "\n".$output."\n";
                     $htac = file_get_contents($file);
-                    $htac .= "\n".$output."\n";
-                    echo "HTACCESS UPDATED"."\n".$htac;
-                    file_put_contents($file, $htac); 
+                    $out .= $htac;
+                    echo "HTACCESS UPDATED"."\n".$out;
+                    file_put_contents($file, $out); 
                 else:
                     echo "HTACCESS file is not writable";
                 endif;

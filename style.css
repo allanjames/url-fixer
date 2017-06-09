@@ -1,0 +1,40 @@
+#bre_content #retrieve, #bre_content #csv {
+            color: #FFF;
+            background-color: #00b9eb;
+            display: table;
+            padding: 7px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #bre_content textarea {
+            width: 90%;
+            height: 500px;
+        }
+        #bre_content form.br-site-changer {
+            width: 75%;
+            padding: 25px;
+            height: 500px;
+        }
+        #bre_content form.br-site-changer label {
+            width: 200px;
+            display: inline-block;
+        }
+        #bre_content .form-item {
+            margin: 15px 0px;
+        }
+        #bre_content .checks{
+            display:inline-block;
+        }
+        #bre_content form.br-site-changer .form-item input[type="text"] {
+            width: 200px;
+            display: inline-block;
+        }
+        #bre_content .br-site-changer div.notice{
+            padding:15px;
+        }
+        #bre_content .br-site-changer div.error, .br-site-changer div.notice-success{
+            padding:15px 10px;   
+        }
+        #bre_content .inl-b {
+            display: inline-block;
+        }

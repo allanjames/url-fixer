@@ -5,9 +5,19 @@
             padding: 7px;
             cursor: pointer;
             border-radius: 5px;
+            display: inline-block;
+        }
+        #bre_content {
+            width: 90%;
+        }
+        #bre_content h1 {
+            text-align: center;
+        }
+        #bre_content img {
+            float: right;
         }
         #bre_content textarea {
-            width: 90%;
+            width: 99%;
             height: 500px;
         }
         #bre_content form.br-site-changer {

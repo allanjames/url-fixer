@@ -101,7 +101,7 @@ function bre_callback() {
             $bre_url_array = array();
             $bre_site_len = strlen(site_url());
             $bre_off = strpos(site_url(),'/',1)+$bre_site_len;
-            $i = 0;
+            $bre_count = 0;
             $bre_output = "\r\n";
             $bre_master = array();
             if ($bre_post_query->have_posts()) : while ($bre_post_query->have_posts()) : $bre_post_query->the_post(); 
@@ -110,11 +110,11 @@ function bre_callback() {
                     $bre_cat_adj = null;
                 }
                 $bre_output .= 'Redirect 301 ';
-                $bre_master[$i]['index'] = $i;
-                $bre_master[$i]['old'] = substr(get_the_permalink(),$bre_adjustment+$bre_cat_adj);
-                $bre_master[$i]['new'] = substr(get_the_permalink(),$bre_site_len);
+                $bre_master[$bre_count]['index'] = $bre_count;
+                $bre_master[$bre_count]['old'] = substr(get_the_permalink(),$bre_adjustment+$bre_cat_adj);
+                $bre_master[$bre_count]['new'] = substr(get_the_permalink(),$bre_site_len);
                 $bre_output .= substr(get_the_permalink(),$bre_adjustment+$bre_cat_adj).' '.substr(get_the_permalink(),$bre_site_len)."\r\n"; 
-                $i++;
+                $bre_count++;
                 endwhile; 
             endif;
             if($bre_csv==2){ 

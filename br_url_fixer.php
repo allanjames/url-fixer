@@ -1,8 +1,8 @@
 <?php
 /*
-	Plugin Name: Brafton URL Fixer
+	Plugin Name: Brafton Redirect Exporter
 	Plugin URI: http://www.brafton.com/support/wordpress
-	Description: simple plugin for updating urls
+	Description: simple plugin for updating url redirects
 	Version: 1.0
     Requires: 4.0
 	Author: Brafton, Inc.

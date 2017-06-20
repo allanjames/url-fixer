@@ -5,7 +5,7 @@ Install and activate the plugin.  Plugin settings can then be found by navigatin
 
 Example:
 
-www.rootdomain.com/post-title/ ---------------->  wwww.rootdomain.com/blog/post-title
+www.rootdomain.com/post-title/ ---------------->  www.rootdomain.com/blog/post-title
 
 There also exists the option to include the post category in the redirect where it did not exist in the previous post structure.
 

@@ -29,6 +29,14 @@ jQuery(document).ready(function($){
             });
         });
 
+        $('#offset').keyup(function(){
+            var offVal = $(this).val();
+            var dataUrl = $('#bre_url').attr('data-url');
+            var testUrl = dataUrl.substring(0,offVal)+"/";
+            console.log(offVal);
+            $('#bre_url').html(testUrl);
+        });
+
         $('#csv').click(function(){
 
             var data = retrieve(csv=1);

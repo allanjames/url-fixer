@@ -10,6 +10,14 @@
         #bre_content {
             width: 90%;
         }
+        #bre_content input[type="text"] {
+            width: 30px;
+            background-color: #67C81D;
+            color: #FFF;
+            height: 24px;
+            font-weight: 600;
+            font-size: 1.3em;
+        }
         #bre_content h1 {
             text-align: center;
         }
@@ -24,6 +32,11 @@
             width: 75%;
             padding: 25px;
             height: 500px;
+        }
+        .bre_background {
+            background-color: #67C81D;
+            padding: 0 5px;
+            color: #FFF;
         }
         #bre_content form.br-site-changer label {
             width: 200px;

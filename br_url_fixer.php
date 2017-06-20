@@ -2,7 +2,7 @@
 /*
 	Plugin Name: Brafton Redirect Exporter
 	Plugin URI: http://www.brafton.com/support/wordpress
-	Description: simple plugin for updating url redirects
+	Description: simple plugin for updating urls
 	Version: 1.0
     Requires: 4.0
 	Author: Brafton, Inc.
@@ -45,17 +45,18 @@ class BrUrlFixer{
         $this->getposturls();
         $site = site_url();
         $site_len = strlen(site_url());
-        $off = strpos(site_url(),'/',1)+$site_len;
+        $full = get_option( 'permalink_structure' );
+        $off = strpos($full,'/',1)+$site_len;
 
         ?>
         <div id="bre_content">
         <h1>Brafton Redirect Exporter</h1>
         <img src="data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDAwMDAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMTAwIDEwMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHBhdGggZD0iTTk0LDMxdi0yaDF2LTFoLTF2LTJoLTJ2MmgtMXYtMmgtMnYyaC0ydi0xdi02aC00djZoM3YxSDY2djFoMC4zNzV2My45NTJMNjEsMzl2OGgxMXYtOCAgbC01LjM3NS02LjA0OFYyOWgxMi4yMTNMODUsMzUuMTYyVjQ3aC0zdjJjLTEuNzc4LDAtMywwLTMsMHY4SDMwdi04VjI5aC0zLjc1di0zLjAxYzAuNjA1LTAuMDMyLDIuMzQ3LTAuMTg5LDQuNzUtMC45OSAgYy0xLjY1NywwLTMuOTk1LTEuMzctNC43NS0xLjg0MVYyM2gtMC41djZIMjN2MTBoLTZ2MTBINWMwLDAsMTcsOSwxNywxN2MzLDAsNjAsMCw2MywwYzAtNCw2LTExLDEwLTExYzAtNCwwLTYsMC02ICBjLTAuOTMyLDAtMi44MjgsMC01LDB2LTJoLTNWMjloMnYyaDJ2LTJoMXYySDk0eiBNNjEuMzU5LDM5bDUuMTQxLTUuODE1TDcxLjY3MiwzOUg2MS4zNTl6IE0yMCw0NWgtMnYtMmgyVjQ1eiBNMjAsNDJoLTJ2LTJoMlY0MnogICBNMjMsNDVoLTJ2LTJoMlY0NXogTTIzLDQyaC0ydi0yaDJWNDJ6IE0yNiw0NWgtMnYtMmgyVjQ1eiBNMjYsNDJoLTJ2LTJoMlY0MnogTTI2LDM5aC0ydi0yaDJWMzl6IE0yNiwzNmgtMnYtMmgyVjM2eiBNMjksNDVoLTJ2LTIgIGgyVjQ1eiBNMjksNDJoLTJ2LTJoMlY0MnogTTI5LDM5aC0ydi0yaDJWMzl6IE0yOSwzNmgtMnYtMmgyVjM2eiBNMjksMzNoLTV2LTNoNVYzM3ogTTg0LDI1di0zaDJ2M0g4NHogTTc5LjE5MywyOUg4NXY1LjgwNyAgTDc5LjE5MywyOXoiLz48cGF0aCBkPSJNMzEsNDh2OGgxMXYtOEgzMXogTTMzLDU1aC0xdi02aDFWNTV6IE0zNSw1NWgtMXYtNmgxVjU1eiBNMzcsNTVoLTF2LTZoMVY1NXogTTM5LDU1aC0xdi02aDFWNTV6ICAgTTQxLDU1aC0xdi02aDFWNTV6Ii8+PHJlY3QgeD0iNDMiIHk9IjQ4IiB3aWR0aD0iMTEiIGhlaWdodD0iOCIvPjxyZWN0IHg9IjU1IiB5PSI0OCIgd2lkdGg9IjExIiBoZWlnaHQ9IjgiLz48cmVjdCB4PSI2NyIgeT0iNDgiIHdpZHRoPSIxMSIgaGVpZ2h0PSI4Ii8+PHJlY3QgeD0iNDkiIHk9IjM5IiB3aWR0aD0iMTEiIGhlaWdodD0iOCIvPjxyZWN0IHg9IjM3IiB5PSIzOSIgd2lkdGg9IjExIiBoZWlnaHQ9IjgiLz48L3N2Zz4=" width="200px" />
-        <h2>Site URL: <?php echo $site; ?></h2>
-        <h2>Site URL Length: <?php echo $site_len; ?></h2>
-        <h2>Suggested Offset: <?php echo $off; ?></h2>
+        <h2>Site URL: <span id="bre_site_len" class="bre_background"><?php echo $site; ?></span></h2>
+        <h2>Site URL Length: <span class="bre_background"><?php echo $site_len; ?></span></h2>
+        <h2>Suggested Offset: <span class="bre_background"><?php echo $off; ?></span></h2>
         <h2 class="inl-b">Desired Offset:</h2>
-        <input type="text" id = "offset" />
+        <input type="text" id = "offset" class="bre_background"/>
         <h2 class="inl-b">Type:</h2>
         <select id="type"> 
             <option value="post" selected="selected">Post</option> 
@@ -66,7 +67,8 @@ class BrUrlFixer{
             <option value="yes">Yes</option> 
             <option value="no" selected="selected">No</option>
         </select>
-        <h2>URL format: <?php echo get_option( 'permalink_structure' ); ?></h2>
+        <h2>Old Post url format: <span id="bre_url" class="bre_background" data-url="<?php $sample_url = $site.$full; echo $sample_url; ?>"></span></h2>
+        <h2>Existing Post url format: <span class="bre_background"><?php echo get_option( 'permalink_structure' ); ?></span></h2>
         <h2 id="retrieve" >Update HTACCESS</h2>
         <h2 id="csv" >export to CSV</h2>
         <textarea></textarea>

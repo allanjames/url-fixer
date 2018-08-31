@@ -1,4 +1,6 @@
 # Brafton Redirect Exporter
+https://wordpress.org/plugins/brafton-redirect-exporter/
+
 simple plugin to create htaccess code for redirects
 
 Install and activate the plugin.  Plugin settings can then be found by navigating to the settings option in the left hand navigation after activation.  Main intent of the plugin is to set redirects for posts or pages after the url structure has been modified via the permalinks settings.  So as a common example, if post urls were updated to add the word "blog" in the url structure directly after the root url and before the post title, this plugin helps to set redirects from the old url to the new one in bulk.
